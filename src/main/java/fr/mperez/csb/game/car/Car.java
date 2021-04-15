@@ -5,34 +5,37 @@ import fr.mperez.csb.math.Point;
 public class Car {
 
     private final Point point;
-    private final int checkpointDistance;
-    private final int checkpointAngle;
+    private final Point velocity;
+    private final int angle;
+    private final Point checkpoint;
+    private final double distance;
 
-    public Car(Point point, int checkpointDistance, int checkpointAngle) {
+    public Car(Point point, Point velocity, int angle, Point checkpoint, double distance) {
         this.point = point;
-        this.checkpointDistance = checkpointDistance;
-        this.checkpointAngle = checkpointAngle;
+        this.velocity = velocity;
+        //TODO : angle is probably angle of pod now, and not angle between pod and checkpoint
+        this.angle = angle;
+        this.checkpoint = checkpoint;
+        this.distance = distance;
     }
 
-    public int getX() {
-        return point.getX();
-    }
-
-    public int getY() {
-        return point.getY();
-    }
-
-    public Point getPoint(){
+    public Point getPoint() {
         return point;
     }
 
-    public int distance() {
-        return checkpointDistance;
+    public Point getVelocity() {
+        return velocity;
     }
 
-    public int angle() {
-        return checkpointAngle;
+    public int getAngle() {
+        return angle;
     }
 
+    public Point getCheckpoint() {
+        return checkpoint;
+    }
 
+    public double getDistance(){
+        return distance;
+    }
 }

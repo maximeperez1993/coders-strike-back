@@ -1,8 +1,12 @@
 package fr.mperez.csb.math;
 
-public class Geometry {
+public final class Geometry {
 
-    public double distance(Point a, Point b) {
+    private Geometry() {
+
+    }
+
+    public static double distance(Point a, Point b) {
         return Math.hypot(Math.abs(a.getX() - b.getX()), Math.abs(a.getY() - b.getY()));
     }
 
@@ -14,7 +18,9 @@ public class Geometry {
      * @param higher
      * @return
      */
-    public boolean isBetween(int property, int lower, int higher) {
+    public static boolean isBetween(int property, int lower, int higher) {
         return property >= lower && property < higher;
     }
+
+
 }
