@@ -4,12 +4,14 @@ import fr.mperez.csb.math.Geometry;
 
 public class Engine {
     private final GameState state;
+    private final GameState previousState;
     private final Geometry geometry;
 
     private static boolean hasBoost = true;
 
-    public Engine(GameState state, Geometry geometry) {
+    public Engine(GameState state,GameState previousState, Geometry geometry) {
         this.state = state;
+        this.previousState = previousState;
         this.geometry = geometry;
     }
 
