@@ -11,14 +11,18 @@ public class Car {
     private final Point checkpoint;
     private final int angle;
     private final double distance;
+    private final boolean hasBoost;
+    private final Runnable onBoost;
 
-    public Car(Point point, Point velocity, int angleAbsolute, Point checkpoint) {
+    public Car(Point point, Point velocity, int angleAbsolute, Point checkpoint, boolean hasBoost, Runnable onBoost) {
         this.point = point;
         this.velocity = velocity;
         this.angleAbsolute = angleAbsolute;
         this.checkpoint = checkpoint;
         this.angle = Geometry.angle(point, checkpoint, angleAbsolute);
         this.distance = Geometry.distance(point, checkpoint);
+        this.hasBoost = hasBoost;
+        this.onBoost = onBoost;
     }
 
     public Point getPoint() {
@@ -41,14 +45,23 @@ public class Car {
         return checkpoint;
     }
 
-    public double getDistance(){
+    public double getDistance() {
         return distance;
+    }
+
+    public boolean hasBoost() {
+        return hasBoost;
+    }
+
+    public void onBoost() {
+        this.onBoost.run();
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "point=" + point +
+                "hasBoost=" + hasBoost +
+                ", point=" + point +
                 ", angle=" + angle +
                 ", velocity=" + velocity +
                 ", checkpoint=" + checkpoint +

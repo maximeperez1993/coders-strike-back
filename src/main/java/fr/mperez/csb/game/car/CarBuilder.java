@@ -1,7 +1,5 @@
 package fr.mperez.csb.game.car;
 
-import fr.mperez.csb.math.Geometry;
-import fr.mperez.csb.math.Physics;
 import fr.mperez.csb.math.Point;
 
 public class CarBuilder {
@@ -9,6 +7,8 @@ public class CarBuilder {
     private Point velocity;
     private int angle;
     private Point checkpoint;
+    private boolean hasBoost;
+    private Runnable onBoost;
 
     public CarBuilder setPoint(Point point) {
         this.point = point;
@@ -25,12 +25,23 @@ public class CarBuilder {
         return this;
     }
 
-    public CarBuilder setCheckpoint(Point checkpoint){
+    public CarBuilder setCheckpoint(Point checkpoint) {
         this.checkpoint = checkpoint;
         return this;
     }
 
-    public Car build() {
-        return new Car(point, velocity, angle, checkpoint);
+    public CarBuilder setHasBoost(boolean hasBoost) {
+        this.hasBoost = hasBoost;
+        return this;
     }
+
+    public CarBuilder onBoost(Runnable onBoost) {
+        this.onBoost = onBoost;
+        return this;
+    }
+
+    public Car build() {
+        return new Car(point, velocity, angle, checkpoint, hasBoost, onBoost);
+    }
+
 }

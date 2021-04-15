@@ -1,8 +1,5 @@
 package fr.mperez.csb;
 
-import fr.mperez.csb.math.Geometry;
-import fr.mperez.csb.math.Physics;
-
 import java.util.Scanner;
 
 public class Player {
@@ -13,9 +10,12 @@ public class Player {
 
         while (true) {
             TurnState state = gameReader.readTurn();
-            Engine engine = new Engine();
-            engine.update(state.getMyCars()[0]);
-            engine.update(state.getMyCars()[1]);
+            CarManager car1Manager = new CarManager(state.getMyCars()[0]);
+            car1Manager.update();
+
+
+            CarManager car2Manager = new CarManager(state.getMyCars()[1]);
+            car2Manager.update();
         }
     }
 }
