@@ -27,21 +27,16 @@ public class Engine {
     }
 
     private int manageSpeed() {
-        if (state.myCar().angle() > 90 || state.myCar().angle() < -90) {
+        if (state.myCar().angle() >= 90 || state.myCar().angle() <= -90) {
             return 0;
         }
 
-        if (geometry.isBetween(state.myCar().distance(), 1000,2000)) {
-            return 90;
-        }
-
-        if (geometry.isBetween(state.myCar().distance(), 2000,3000)) {
-            return 95;
-        }
-
-
-
-        return 100;
+        double factor = Math.cos(Math.toRadians(state.myCar().angle())) * 0.15;
+        double force = (factor * state.myCar().distance());
+        System.err.println("factor=" + factor + "  distance=" + state.myCar().distance() + " force="+force);
+        force = Math.min(force, 100);
+        force = Math.max(0, force);
+        return (int)force;
     }
 
     private void boost() {
