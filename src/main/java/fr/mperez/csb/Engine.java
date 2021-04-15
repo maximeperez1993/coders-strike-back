@@ -1,18 +1,22 @@
 package fr.mperez.csb;
 
 import fr.mperez.csb.math.Geometry;
+import fr.mperez.csb.math.Physics;
+import fr.mperez.csb.math.Point;
 
 public class Engine {
     private final GameState state;
     private final GameState previousState;
     private final Geometry geometry;
+    private final Physics physics;
 
     private static boolean hasBoost = true;
 
-    public Engine(GameState state,GameState previousState, Geometry geometry) {
+    public Engine(GameState state, GameState previousState, Geometry geometry, Physics physics) {
         this.state = state;
         this.previousState = previousState;
         this.geometry = geometry;
+        this.physics = physics;
     }
 
     public void update() {
@@ -22,8 +26,17 @@ public class Engine {
             boost();
             return;
         }
-        System.out.println(state.nextCheckpoint().getX() + " " + state.nextCheckpoint().getY() + " " + manageSpeed());
+        Point target = manageTarget();
+        System.out.println(target.getX() + " " + target.getY() + " " + manageSpeed());
+    }
 
+    private Point manageTarget() {
+        Point myPreviousCarPoint = previousState != null ? previousState.myCar().getPoint() : new Point(0, 0);
+        Point myCarVelocity = physics.calculateVelocity(myPreviousCarPoint, state.myCar().getPoint());
+        System.err.println("velocity=" + myCarVelocity);
+        int x = state.nextCheckpoint().getX() - (myCarVelocity.getX() * 3);
+        int y = state.nextCheckpoint().getY() - (myCarVelocity.getY() * 3);
+        return new Point(x, y);
     }
 
     private int manageSpeed() {
@@ -33,10 +46,10 @@ public class Engine {
 
         double factor = Math.cos(Math.toRadians(state.myCar().angle())) * 0.15;
         double force = (factor * state.myCar().distance());
-        System.err.println("factor=" + factor + "  distance=" + state.myCar().distance() + " force="+force);
+        System.err.println("factor=" + factor + "  distance=" + state.myCar().distance() + " force=" + force);
         force = Math.min(force, 100);
         force = Math.max(0, force);
-        return (int)force;
+        return (int) force;
     }
 
     private void boost() {

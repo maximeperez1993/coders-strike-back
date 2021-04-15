@@ -22,6 +22,10 @@ public class Car {
         return point.getY();
     }
 
+    public Point getPoint(){
+        return point;
+    }
+
     public int distance() {
         return checkpointDistance;
     }
