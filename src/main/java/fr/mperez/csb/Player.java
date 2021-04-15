@@ -11,9 +11,12 @@ public class Player {
         GameReader gameReader = new GameReader(new Scanner(System.in));
         Geometry geometry = new Geometry();
         Physics physics = new Physics();
-        GameState previousState = null;
+
+        gameReader.readInit();
+
+        TurnState previousState = null;
         while (true) {
-            GameState state = gameReader.read();
+            TurnState state = gameReader.readTurn();
             Engine engine = new Engine(state, previousState, geometry, physics);
             engine.update();
             previousState = state;

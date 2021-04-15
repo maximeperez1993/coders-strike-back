@@ -3,12 +3,12 @@ package fr.mperez.csb;
 import fr.mperez.csb.game.car.Car;
 import fr.mperez.csb.game.checkpoint.Checkpoint;
 
-public class GameState {
+public class TurnState {
     private final Car myCar;
     private final Car hisCar;
     private final Checkpoint nextCheckpoint;
 
-    public GameState(Car myCar, Car hisCar, Checkpoint nextCheckpoint) {
+    public TurnState(Car myCar, Car hisCar, Checkpoint nextCheckpoint) {
         this.myCar = myCar;
         this.hisCar = hisCar;
         this.nextCheckpoint = nextCheckpoint;
