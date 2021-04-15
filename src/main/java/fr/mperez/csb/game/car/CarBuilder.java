@@ -31,6 +31,6 @@ public class CarBuilder {
     }
 
     public Car build() {
-        return new Car(point, velocity, angle, checkpoint, Geometry.distance(point, checkpoint));
+        return new Car(point, velocity, angle, checkpoint);
     }
 }

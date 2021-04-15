@@ -1,22 +1,24 @@
 package fr.mperez.csb.game.car;
 
+import fr.mperez.csb.math.Geometry;
 import fr.mperez.csb.math.Point;
 
 public class Car {
 
     private final Point point;
     private final Point velocity;
-    private final int angle;
+    private final int angleAbsolute;
     private final Point checkpoint;
+    private final int angle;
     private final double distance;
 
-    public Car(Point point, Point velocity, int angle, Point checkpoint, double distance) {
+    public Car(Point point, Point velocity, int angleAbsolute, Point checkpoint) {
         this.point = point;
         this.velocity = velocity;
-        //TODO : angle is probably angle of pod now, and not angle between pod and checkpoint
-        this.angle = angle;
+        this.angleAbsolute = angleAbsolute;
         this.checkpoint = checkpoint;
-        this.distance = distance;
+        this.angle = Geometry.angle(point, checkpoint, angleAbsolute);
+        this.distance = Geometry.distance(point, checkpoint);
     }
 
     public Point getPoint() {
@@ -25,6 +27,10 @@ public class Car {
 
     public Point getVelocity() {
         return velocity;
+    }
+
+    public int getAngleAbsolute() {
+        return angleAbsolute;
     }
 
     public int getAngle() {
@@ -37,5 +43,17 @@ public class Car {
 
     public double getDistance(){
         return distance;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "point=" + point +
+                ", angle=" + angle +
+                ", velocity=" + velocity +
+                ", checkpoint=" + checkpoint +
+                ", angleAbsolute=" + angleAbsolute +
+                ", distance=" + distance +
+                "}";
     }
 }

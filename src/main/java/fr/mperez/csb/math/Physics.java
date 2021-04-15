@@ -2,7 +2,8 @@ package fr.mperez.csb.math;
 
 public class Physics {
 
-    public Point calculateVelocity(Point previous, Point current){
-        return new Point(current.getX() - previous.getX(),current.getY() - previous.getY());
+
+    public static double clamp(double value, double min, double max) {
+        return Math.max(min, Math.min(value, max));
     }
 }
